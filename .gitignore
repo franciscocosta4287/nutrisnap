@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.Python
+env/
+venv/
+.env
+*.sqlite3
+db.sqlite3
+
+# Django
+staticfiles/
+media/
+*.log
+local_settings.py
+
+# Flutter
+**/ios/Flutter/.last_build_id
+**/ios/Flutter/Flutter.podspec
+**/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/ephemeral/
+**/ios/Flutter/flutter_export_environment.sh
+**/ios/ServiceDefinitions.json
+**/ios/Runner/GeneratedPluginRegistrant.*
+**/android/app/debug/
+**/android/app/profile/
+**/android/app/release/
+**/android/.gradle/
+**/build/
+**/ios/.symlinks/
+**/ios/Pods/
+
+# IDE
+.vscode/
+.idea/
+*.iml
+*.swp
+*.swo
+
+# Misc
+.DS_Store
+*.log
+*.tmp
+*.bak

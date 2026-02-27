@@ -1,0 +1,22 @@
+# Django
+Django==4.2.7
+gunicorn==21.2.0
+
+# Database
+psycopg2-binary==2.9.9
+
+# Redis
+redis==5.0.1
+django-redis==5.4.0
+
+# Images
+Pillow==10.1.0
+
+# Environment
+python-dotenv==1.0.0
+
+# Django REST (opcional)
+djangorestframework==3.14.0
+
+# Utils
+django-extensions==3.2.3

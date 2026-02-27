@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NutriSnap Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100 p-10">
+
+<h1 class="text-3xl font-bold mb-6">NutriSnap Admin Dashboard</h1>
+
+<div class="grid grid-cols-4 gap-6 mb-10">
+    <div class="bg-white p-6 rounded-2xl shadow">
+        <p class="text-gray-500">Total</p>
+        <h2 id="total" class="text-2xl font-bold"></h2>
+    </div>
+
+    <div class="bg-green-100 p-6 rounded-2xl shadow">
+        <p class="text-gray-500">Completed</p>
+        <h2 id="completed" class="text-2xl font-bold text-green-600"></h2>
+    </div>
+
+    <div class="bg-yellow-100 p-6 rounded-2xl shadow">
+        <p class="text-gray-500">Processing</p>
+        <h2 id="processing" class="text-2xl font-bold text-yellow-600"></h2>
+    </div>
+
+    <div class="bg-red-100 p-6 rounded-2xl shadow">
+        <p class="text-gray-500">Error</p>
+        <h2 id="error" class="text-2xl font-bold text-red-600"></h2>
+    </div>
+</div>
+
+<div class="bg-white p-6 rounded-2xl shadow">
+    <canvas id="chart"></canvas>
+</div>
+
+
+
+<div class="bg-white p-6 rounded-2xl shadow mt-8">
+    <h2 class="text-xl font-bold mb-4">Últimas análises</h2>
+    <table class="w-full">
+        <thead>
+            <tr class="text-left border-b">
+                <th>ID</th>
+                <th>Status</th>
+                <th>Calories</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+    </table>
+</div>
+
+
+<div class="flex justify-end mb-4">
+    <button onclick="toggleDark()" 
+        class="bg-gray-800 text-white px-4 py-2 rounded-xl">
+        Toggle Dark Mode
+    </button>
+</div>
+
+<script>
+async function loadMetrics() {
+    const res = await fetch("/api/dashboard/metrics/");
+    const data = await res.json();
+
+    document.getElementById("total").innerText = data.total;
+    document.getElementById("completed").innerText = data.completed;
+    document.getElementById("processing").innerText = data.processing;
+    document.getElementById("error").innerText = data.error;
+}
+
+async function loadChart() {
+    const res = await fetch("/api/dashboard/chart/");
+    const data = await res.json();
+
+    new Chart(document.getElementById("chart"), {
+        type: "line",
+        data: {
+            labels: data.map(item => item.day),
+            datasets: [{
+                label: "Analyses",
+                data: data.map(item => item.count),
+                borderColor: "#3b82f6",
+                fill: false
+            }]
+        }
+    });
+}
+
+loadMetrics();
+loadChart();
+
+setInterval(() => {
+    loadMetrics();
+}, 5000);
+
+
+function toggleDark() {
+    document.body.classList.toggle("bg-gray-900");
+    document.body.classList.toggle("text-white");
+}
+
+
+async function loadTable() {
+    const res = await fetch("/api/analyze/");
+    const data = await res.json();
+
+    const tbody = document.getElementById("tableBody");
+    tbody.innerHTML = "";
+
+    data.forEach(item => {
+        let color = "bg-gray-200";
+
+        if (item.status === "completed") color = "bg-green-200";
+        if (item.status === "processing") color = "bg-yellow-200";
+        if (item.status === "error") color = "bg-red-200";
+
+        tbody.innerHTML += `
+            <tr class="border-b">
+                <td>${item.id}</td>
+                <td>
+                    <span class="px-3 py-1 rounded-full ${color}">
+                        ${item.status}
+                    </span>
+                </td>
+                <td>${item.calories ?? "-"}</td>
+            </tr>
+        `;
+    });
+}
+
+loadTable();
+setInterval(loadTable, 5000);
+</script>
+
+</body>
+</html>

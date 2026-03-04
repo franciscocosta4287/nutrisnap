@@ -22,3 +22,4 @@ djangorestframework==3.14.0
 django-extensions==3.2.3
 
 celery==5.3.6
+dj-database-url==2.1.0

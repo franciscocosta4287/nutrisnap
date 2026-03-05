@@ -145,3 +145,13 @@ Me diga qual direção você quer seguir. 🚀
 
 ========================
 postgresql://nutrisnap_nhz7_user:aOWRa0YhWr38XcM9JiOBf6CRQadGxdBd@dpg-d6k8e24r85hc73c440j0-a/nutrisnap_nhz7
+
+
+---------------
+como gerar APK para instalar em qualquer celular
+
+como publicar na Play Store
+
+E também posso te mostrar como transformar o NutriSnap em um SaaS de IA alimentar 🚀
+
+Mas primeiro vamos fazer o app abrir no seu celular

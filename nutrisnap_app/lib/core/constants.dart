@@ -5,4 +5,7 @@ class AppConstants {
   // const String API_BASE_URL = "https://nutrisnap-api-ehqh.onrender.com";
   // https://nutrisnap-api-ehqh.onrender.com/api/analyze/
   // Android emulator usa 10.0.2.2 para localhost
+  
+  // Timeout para requisições (em segundos)
+  static const int timeoutSeconds = 30;
 }

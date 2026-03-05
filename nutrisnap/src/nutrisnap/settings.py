@@ -60,6 +60,14 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'nutrisnap.urls'
 
+
+CORS_ALLOWED_ORIGINS = [
+    "https://nutrisnap-api-ehqh.onrender.com",
+    "http://localhost",
+    "http://10.0.2.2",  # Android emulator
+    # Adicione o IP do seu celular se necessário
+]
+
 CORS_ALLOW_ALL_ORIGINS = True
 
 TEMPLATES = [
